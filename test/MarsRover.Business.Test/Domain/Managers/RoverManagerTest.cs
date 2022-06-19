@@ -10,27 +10,37 @@ namespace MarsRover.Business.Test.Domain.Managers
 {
     public class RoverManagerTest
     {
-        [InlineData("1 3 E",1,3,RoverDirection.E)]
-        [InlineData("2 1 W",2,1,RoverDirection.W)]
+        [InlineData("1 3 E", 1, 3, RoverDirection.E)]
+        [InlineData("2 1 W", 2, 1, RoverDirection.W)]
         public void SetRoverPositionGoodTest(string positionInput, int expectedX, int expectedY, RoverDirection expectedDirection)
         {
-            RoverManager  roverManager = new RoverManager();
+            #region Act
+            RoverManager roverManager = new RoverManager();
             roverManager.SetRoverPosition(positionInput);
+            #endregion
+
+            #region Assert
             Assert.Equal(expectedX, roverManager.ActiveRover.CurrentPositionX);
             Assert.Equal(expectedY, roverManager.ActiveRover.CurrentPositionY);
             Assert.Equal(expectedDirection, roverManager.ActiveRover.CurrentDirection);
+            #endregion
         }
 
-        [InlineData("1 3 E",Movement.L,"1 3 N")]
-        [InlineData("2 3 S",Movement.R,"1 3 W")]
+        [InlineData("1 3 E", Movement.L, "1 3 N")]
+        [InlineData("2 3 S", Movement.R, "1 3 W")]
         [InlineData("2 3 S", Movement.M, "2 2 S")]
-        public void ApplyMovementGoodTest(string positionInput,Movement directionCommand,string expectedResult)
+        public void ApplyMovementGoodTest(string positionInput, Movement directionCommand, string expectedResult)
         {
+            #region Act
             RoverManager roverManager = new RoverManager();
             roverManager.SetRoverPosition(positionInput);
             roverManager.ApplyMovement(directionCommand);
             string result = roverManager.GetActiveRoversCurrentPositionAsString();
+            #endregion
+
+            #region Assert
             Assert.Equal(expectedResult, result);
+            #endregion
         }
 
         [InlineData("13 E")]
@@ -40,8 +50,10 @@ namespace MarsRover.Business.Test.Domain.Managers
             bool exceptionIsThrowed = false;
             try
             {
+                #region Act
                 RoverManager roverManager = new RoverManager();
                 roverManager.SetRoverPosition(positionInput);
+                #endregion
             }
             catch (LogicException)
             {
@@ -49,7 +61,9 @@ namespace MarsRover.Business.Test.Domain.Managers
             }
             finally
             {
+                #region Assert
                 Assert.True(exceptionIsThrowed);
+                #endregion
             }
         }
 
@@ -59,9 +73,11 @@ namespace MarsRover.Business.Test.Domain.Managers
             bool exceptionIsThrowed = false;
             try
             {
+                #region Act
                 RoverManager roverManager = new RoverManager();
                 roverManager.SetRoverPosition(positionInput);
                 roverManager.ApplyMovement(directionCommand);
+                #endregion
             }
             catch (LogicException ex)
             {
@@ -69,7 +85,9 @@ namespace MarsRover.Business.Test.Domain.Managers
             }
             finally
             {
+                #region Assert
                 Assert.True(!exceptionIsThrowed);
+                #endregion
             }
         }
     }

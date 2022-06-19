@@ -1,3 +1,5 @@
+using MarsRover.Business.Domain;
+
 namespace MarsRover.Test
 {
 
@@ -11,7 +13,7 @@ namespace MarsRover.Test
 
         [Theory]
         [MemberData(nameof(SampleDatas))]
-        public void CreatePleateAndApplyCommand(string plateauSize,string roverPosition, string route, string expectedResult)
+        public void CreatePleateAndApplyCommandTest(string plateauSize,string roverPosition, string route, string expectedResult)
         {
             #region Act
             RoverDomainModule roverDomainModule = new RoverDomainModule();

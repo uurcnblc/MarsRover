@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MarsRover.Business\MarsRover.Business.csproj" />
+    <ProjectReference Include="..\..\src\MarsRover.Business\MarsRover.Business.csproj" />
   </ItemGroup>
 
 </Project>

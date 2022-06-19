@@ -9,10 +9,15 @@ namespace MarsRover.Business.Test.Domain.Managers
         [InlineData("9 9",9,9)]
         public void TestSetPlateauGoodCase(string sizeInput, int expectedWidth, int expectedHeight)
         {
+            #region Act
             PlateauManager plateauManager = new PlateauManager();
             plateauManager.SetPlateauSize(sizeInput);
+            #endregion
+
+            #region Assert
             Assert.Equal(expectedWidth, plateauManager.ActivePlateau.Width);
             Assert.Equal(expectedHeight, plateauManager.ActivePlateau.Height);
+            #endregion
         }
 
         [Theory]
@@ -24,8 +29,10 @@ namespace MarsRover.Business.Test.Domain.Managers
             bool exceptionThrowed = false; 
             try
             {
+                #region Act
                 PlateauManager plateauManager = new PlateauManager();
                 plateauManager.SetPlateauSize(sizeInput);
+                #endregion
             }
             catch (LogicException)
             {
@@ -33,7 +40,9 @@ namespace MarsRover.Business.Test.Domain.Managers
             }
             finally
             {
+                #region Assert
                 Assert.True(exceptionThrowed);
+                #endregion
             }
         }
     }
